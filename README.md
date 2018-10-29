@@ -54,4 +54,11 @@
             ],
         ],
 	```
+	
+	- Прописываем почту менеджера  файл /common/config/params.php
+	```
+	    return [
+		    'managerEmail' => 'manager@example.com',
+		];
+	```
 
