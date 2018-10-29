@@ -28,7 +28,7 @@ class SiteController extends Controller
                     [
                         'actions' => ['logout', 'index'],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['admin', 'manager'],
                     ],
                 ],
             ],
@@ -75,8 +75,21 @@ class SiteController extends Controller
         }
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+
+        if ($model->load(Yii::$app->request->post())) {
+             /** @var User $user */
+            $user = $model->getUser();
+            if (!empty($user)
+             && (Yii::$app->authManager->checkAccess($user->getId(), 'admin')
+             or Yii::$app->authManager->checkAccess($user->getId(), 'manager'))
+            ) {
+                $model->login();
+                return $this->goBack();
+            } else {
+                Yii::$app->session->setFlash('error', 'This is not authorized for administration.');
+                return $this->refresh();
+            }
+
         } else {
             $model->password = '';
 
