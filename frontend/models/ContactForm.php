@@ -37,7 +37,7 @@ class ContactForm extends Model
     public function sendEmail()
     {
         return Yii::$app->mailer->compose()
-            ->setTo(Yii::$app->params['adminEmail'])
+            ->setTo(Yii::$app->params['managerEmail'])
             ->setFrom([Yii::$app->user->identity->email => Yii::$app->user->identity->username])
             ->setSubject($this->subject)
             ->setTextBody($this->body)
