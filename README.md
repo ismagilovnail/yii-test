@@ -36,7 +36,7 @@
 - Применение миграций: `yii migrate`
 - Создание админа: `yii admin/create`
 - Создание менеджера: `yii manager/create`
-- Инициализация прав доступа: `yii manager/create`
+- Инициализация прав доступа: `yii rbac/init`
 
 4. Настройка почтового клиента
      - Прописываем свои данные. файл /backend/config/main.php
